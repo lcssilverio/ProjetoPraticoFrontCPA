@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import React from 'react';
+import NQueenProblem from './components/NQueenProblem';
+import SudokuSolver from './components/SudokuSolver';
+import MazeResolver from './components/MazeResolver';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="header">
+        <h1>Trabalho Final CPA</h1>
+      </div>
+      <div className="main">
+        <NQueenProblem />
+        <SudokuSolver />
+        <MazeResolver />
+      </div>
     </div>
   );
 }
