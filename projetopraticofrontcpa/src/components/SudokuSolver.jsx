@@ -10,7 +10,7 @@ function SudokuSolver() {
     [6, 0, 0, 5, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 1, 0, 7, 8, 0],
     [5, 0, 0, 0, 0, 9, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 4, 0],
+    [0, 0, 0, 0, 0, 0, 0, 4, 0]
   ]);
   const [solution, setSolution] = useState([]);
 
@@ -19,7 +19,7 @@ function SudokuSolver() {
     fetch(`https://localhost:7296/api/v1/sudoku`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sudoku: sudoku }),
+      body: JSON.stringify( sudoku ),
     })
       .then((response) => response.json())
       .then((data) => setSolution(data));
@@ -60,13 +60,14 @@ function SudokuSolver() {
           </tr>
         </thead>
         <tbody>
-          {solution.map((solutionRow, index) => (
+          {Array.isArray(solution) && solution.map((solutionRow, index) => (
             <tr key={index}>
               {solutionRow.map((solutionValue) => (
                 <td>{solutionValue}</td>
               ))}
             </tr>
           ))}
+
         </tbody>
       </table>
     </div>
