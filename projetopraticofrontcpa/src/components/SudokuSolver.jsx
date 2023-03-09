@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function SudokuSolver() {
   const [sudoku, setSudoku] = useState([
@@ -13,21 +13,22 @@ function SudokuSolver() {
     [0, 0, 0, 0, 0, 0, 0, 4, 0]
   ]);
   const [solution, setSolution] = useState([]);
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
+    setError('');
+    setSolution([]);
     event.preventDefault();
     setLoading(true);
     fetch(`https://localhost:7296/api/v1/sudoku`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify( sudoku ),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(sudoku),
     })
       .then((response) => response.json())
-      .then((data) => {
-        setSolution(data);
-        setLoading(false);
-      });
+      .then((data) => {setSolution(data); setLoading(false);})
+      .catch(() => setError("Não foi encontrada uma solução."));
   };
 
   return (
@@ -46,7 +47,9 @@ function SudokuSolver() {
                       value={sudokuValue}
                       onChange={(e) => {
                         const updatedSudoku = [...sudoku];
-                        updatedSudoku[rowIndex][colIndex] = parseInt(e.target.value);
+                        updatedSudoku[rowIndex][colIndex] = parseInt(
+                          e.target.value
+                        );
                         setSudoku(updatedSudoku);
                       }}
                     />
@@ -67,7 +70,8 @@ function SudokuSolver() {
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(solution) && solution.map((solutionRow, index) => (
+          {error && <p>Não foi encontrada uma solução.</p>}
+          {!error && Array.isArray(solution) && solution.map((solutionRow, index) => (
             <tr key={index}>
               {solutionRow.map((solutionValue) => (
                 <td>{solutionValue}</td>
