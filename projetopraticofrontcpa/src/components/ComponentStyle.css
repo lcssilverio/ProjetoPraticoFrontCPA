@@ -1,0 +1,35 @@
+.buttonSubmit {
+  width: 55px;
+  height: 35px;
+  margin: 5px 0 0 4px;
+  color: #fff;
+  background-color: #3498DB;
+  border: 1px solid #E5E8E8;
+}
+
+.buttonSubmit:hover {
+  color: #3498DB;
+  background-color: #fff;
+}
+
+.formInput {
+  height: 35px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: 1px solid #E5E8E8 
+}
+
+.td-style {
+  border: 1px solid #E5E8E8;
+}
+
+.td-solution {
+  border: 0;
+  padding: 3px 3px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

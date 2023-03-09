@@ -20,14 +20,16 @@ function NQueenProblem() {
         <div>
             <form onSubmit={handleSubmit}>
                 <label>
-                    N Queens:
+                    <h3>N Queens:</h3>
                     <input
                         type="number"
                         value={nQueens}
                         onChange={(e) => setNQueens(e.target.value)}
+                        className="formInput"
+                        placeholder='Insira um valor'
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button className="buttonSubmit" type="submit">Enviar</button>
             </form>
             {isLoading ? (
                 
@@ -36,7 +38,7 @@ function NQueenProblem() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Solutions: </th>
+                            <th >Resultado: </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +46,7 @@ function NQueenProblem() {
                             solution.map((solutionRow, index) => (
                                 <tr key={index}>
                                     {solutionRow.map((queenPosition) => (
-                                        <td>{queenPosition}</td>
+                                        <td className="td-solution">{queenPosition}</td>
                                     ))}
                                 </tr>
                             ))

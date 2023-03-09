@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './ComponentStyle.css'
 
 function SudokuSolver() {
   const [sudoku, setSudoku] = useState([
@@ -34,6 +35,7 @@ function SudokuSolver() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h3>Sudoku:</h3>
         <table>
           <tbody>
             {sudoku.map((sudokuRow, rowIndex) => (
@@ -52,6 +54,7 @@ function SudokuSolver() {
                         );
                         setSudoku(updatedSudoku);
                       }}
+                      className='td-style'
                     />
                   </td>
                 ))}
@@ -59,14 +62,14 @@ function SudokuSolver() {
             ))}
           </tbody>
         </table>
-        <button type="submit">Submit</button>
+        <button className="buttonSubmit" type="submit">Enviar</button>
       </form>
       {loading && <div className="loading"></div>}
       {loading && <div>Loading...</div>}
       <table>
         <thead>
           <tr>
-            <th>Solution: </th>
+            <th>Resultado: </th>
           </tr>
         </thead>
         <tbody>
@@ -74,7 +77,7 @@ function SudokuSolver() {
           {!error && Array.isArray(solution) && solution.map((solutionRow, index) => (
             <tr key={index}>
               {solutionRow.map((solutionValue) => (
-                <td>{solutionValue}</td>
+                <td className="td-solution">{solutionValue}</td>
               ))}
             </tr>
           ))}

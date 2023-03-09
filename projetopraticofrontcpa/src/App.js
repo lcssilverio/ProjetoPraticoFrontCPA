@@ -1,8 +1,8 @@
-import React from 'react';
-import NQueenProblem from './components/NQueenProblem';
-import SudokuSolver from './components/SudokuSolver';
-import MazeResolver from './components/MazeResolver';
-import './App.css';
+import React from "react"
+import NQueenProblem from "./components/NQueenProblem"
+import SudokuSolver from "./components/SudokuSolver"
+import MazeResolver from "./components/MazeResolver"
+import "./App.css"
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
         <MazeResolver />
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

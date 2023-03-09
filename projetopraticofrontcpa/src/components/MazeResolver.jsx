@@ -39,7 +39,7 @@ function MazeResolver() {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          Maze:
+          <h3>Maze:</h3>
           <table>
             <tbody>
               {maze.map((row, rowIndex) => (
@@ -58,6 +58,7 @@ function MazeResolver() {
                           );
                           setMaze(newMaze);
                         }}
+                        className='td-style'
                       />
                     </td>
                   ))}
@@ -66,14 +67,14 @@ function MazeResolver() {
             </tbody>
           </table>
         </label>
-        <button type="submit">Submit</button>
+        <button className="buttonSubmit" type="submit">Enviar</button>
       </form>
       {/* Show loading animation when loading state is true */}
       {loading && <div className="loading"></div>}
       <table>
         <thead>
           <tr>
-            <th>Solution:</th>
+            <th>Resultado:</th>
           </tr>
         </thead>
         <tbody>
