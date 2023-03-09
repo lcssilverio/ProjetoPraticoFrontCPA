@@ -8,10 +8,12 @@ function MazeResolver() {
     [1, 0, 0, 0]
   ]);
   const [solution, setSolution] = useState([]);
+  const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setError('');
     setLoading(true); // set loading state to true
     fetch('https://localhost:7296/api/v1/MazeController', {
       method: 'POST',
@@ -27,7 +29,8 @@ function MazeResolver() {
         return response.json();
       })
       .then((data) => setSolution(data.map(step => [step.item1, step.item2])))
-      .catch((error) => setSolution([{ message: error.message }]))
+      //.catch(() => setError("Não foi encontrada uma solução."));
+      .catch((error) => setError([{ message: error.message }]))
       .finally(() => setLoading(false)); // set loading state to false after the request is finished
   };
 
@@ -74,7 +77,8 @@ function MazeResolver() {
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(solution) &&
+          {error && <p>Não foi encontrada uma solução.</p>}
+          {!error && Array.isArray(solution) &&
             solution.map((step, index) => (
               <tr key={index}>
                 <td>({step[0]}, {step[1]})</td>
