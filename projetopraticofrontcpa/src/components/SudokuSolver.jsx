@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function SudokuSolver() {
   const [sudoku, setSudoku] = useState([
@@ -13,16 +13,20 @@ function SudokuSolver() {
     [0, 0, 0, 0, 0, 0, 0, 4, 0],
   ]);
   const [solution, setSolution] = useState([]);
+  const [error, setError] = useState();
 
   const handleSubmit = (event) => {
+    setError('');
+    setSolution([]);
     event.preventDefault();
     fetch(`https://localhost:7296/api/v1/sudoku`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sudoku: sudoku }),
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(sudoku),
     })
       .then((response) => response.json())
-      .then((data) => setSolution(data));
+      .then((data) => setSolution(data))
+      .catch(() => setError("Não foi encontrada uma solução."));
   };
 
   return (
@@ -41,7 +45,9 @@ function SudokuSolver() {
                       value={sudokuValue}
                       onChange={(e) => {
                         const updatedSudoku = [...sudoku];
-                        updatedSudoku[rowIndex][colIndex] = parseInt(e.target.value);
+                        updatedSudoku[rowIndex][colIndex] = parseInt(
+                          e.target.value
+                        );
                         setSudoku(updatedSudoku);
                       }}
                     />
@@ -60,13 +66,15 @@ function SudokuSolver() {
           </tr>
         </thead>
         <tbody>
-          {solution.map((solutionRow, index) => (
-            <tr key={index}>
-              {solutionRow.map((solutionValue) => (
-                <td>{solutionValue}</td>
-              ))}
-            </tr>
-          ))}
+          {!error &&
+            solution.map((solutionRow, index) => (
+              <tr key={index}>
+                {solutionRow.map((solutionValue) => (
+                  <td>{solutionValue}</td>
+                ))}
+              </tr>
+            ))}
+          {error && <p>Não foi encontrada uma solução.</p>}
         </tbody>
       </table>
     </div>
