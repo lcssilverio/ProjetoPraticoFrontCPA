@@ -13,16 +13,21 @@ function SudokuSolver() {
     [0, 0, 0, 0, 0, 0, 0, 4, 0]
   ]);
   const [solution, setSolution] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     fetch(`https://localhost:7296/api/v1/sudoku`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( sudoku ),
     })
       .then((response) => response.json())
-      .then((data) => setSolution(data));
+      .then((data) => {
+        setSolution(data);
+        setLoading(false);
+      });
   };
 
   return (
@@ -53,6 +58,8 @@ function SudokuSolver() {
         </table>
         <button type="submit">Submit</button>
       </form>
+      {loading && <div className="loading"></div>}
+      {loading && <div>Loading...</div>}
       <table>
         <thead>
           <tr>
